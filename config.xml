@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns		= "http://www.w3.org/ns/widgets"
-	xmlns:gap	= "http://phonegap.com/ns/1.0"
-	id		= "com.alunny.amazing"
-	version 	= "1.0.0">
+<widget xmlns = "http://www.w3.org/ns/widgets"
+	xmlns:gap= "http://phonegap.com/ns/1.0"
+	id= "com.alunny.amazing"
+	version= "1.0.0">
 
 	<name>SpeakAll</name>
 
@@ -22,12 +22,12 @@
 		<gap:platform name="blackberry" project="widgets"/>
 	</gap:platforms>
 
-	<icon src="blurry.png" gap:role="default" />
-
-    <gap:splash src="weirdo.png" />
-
-	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	<feature name="http://api.phonegap.com/1.0/file"/>
+	<feature name="http://api.phonegap.com/1.0/media"/>
 	<feature name="http://api.phonegap.com/1.0/network"/>
+	<feature name="http://api.phonegap.com/1.0/notification"/>
+	
+	<access origin="*" />
 
 	<!-- sample preference specification -->
 	<!-- <preference name="autorotate" value="false" readonly="true"/> -->
