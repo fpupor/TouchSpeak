@@ -29,16 +29,21 @@
         states[Connection.CELL_4G]  = 'Cell 4G connection';
         states[Connection.NONE]     = 'No network connection';
 
-        readDataUrl("http://touchspeak.conheca.me/AppFiles/Audio/bbd74649e7fc1910b3e9b5620500705e.mp3");
+			
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+        window.resolveLocalFileSystemURI("http://touchspeak.conheca.me/AppFiles/Audio/bbd74649e7fc1910b3e9b5620500705e.mp3", onResolveSuccess, fail);
     }
 
-	function readDataUrl(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(evt) {
-            console.log("Read as data URL");
-            console.log(evt.target.result);
-        };
-        reader.readAsDataURL(file);
+	function onFileSystemSuccess(fileSystem) {
+        alert(fileSystem.name);
+    }
+
+    function onResolveSuccess(fileEntry) {
+        alert(fileEntry.name);
+    }
+
+    function fail(evt) {
+        alert(evt.target.error.code);
     }
     </script>
   </head>
