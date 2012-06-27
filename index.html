@@ -54,7 +54,7 @@
 					fileTransfer.download("http://touchspeak.conheca.me/AppFiles/Audio/" + fileName, sPath + fileName,
 					function(theFile) {
 						   console.log("download complete: " + theFile.toURL());
-						   showLink(theFile.toURL());
+						   showLink(theFile);
 					},
 					function(error) {
 						   console.log("download error source " + error.source);
@@ -68,7 +68,6 @@
     }
  
     function showLink(url){
-        alert(url);
         
 		var media = new Media(url, function(){
 			console.log('Play');
