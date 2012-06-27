@@ -49,7 +49,7 @@
 					var fileTransfer = new FileTransfer();
 					var fileName = "bbd74649e7fc1910b3e9b5620500705e.mp3";
 					
-					fileTransfer.download("http://touchspeak.conheca.me/AppFiles/Audio/" + fileName, dirEntry.fullPath + fileName,
+					fileTransfer.download("http://touchspeak.conheca.me/AppFiles/Audio/" + fileName, dirEntry.fullPath + "/" + fileName,
 					function(theFile) {
 						console.log("download complete: " + theFile.toURL());
 						playAudio(theFile.toURL());
