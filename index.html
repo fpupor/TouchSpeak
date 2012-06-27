@@ -50,7 +50,7 @@
 
 	function gotDir(d){ 
 		BASEPATH = d; // I store my App basis Directory. 
-		var reader = base.createReader(); 
+		var reader = BASEPATH.createReader(); 
 		reader.readEntries(gotFiles,cantRead); 
 	} 
 
