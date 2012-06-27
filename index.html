@@ -39,24 +39,20 @@
     }
 	
 	function downloadFile(){
-        window.requestFileSystem(
-		LocalFileSystem.PERSISTENT, 0, 
-		function onFileSystemSuccess(fileSystem) {
-			fileSystem.root.getFile("TouchSpeak/dir.txt",
+        window.requestFileSystem( LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
+			fileSystem.root.getDirectory("TouchSpeak",
 				{
 					create: true,
 					exclusive: false
 				}, 
-				function (fileEntry){
-					var sPath = fileEntry.fullPath.replace("dir.txt","");
+				function (dirEntry){
 					var fileTransfer = new FileTransfer();
 					var fileName = "bbd74649e7fc1910b3e9b5620500705e.mp3";
-					fileEntry.remove();
-
-					fileTransfer.download("http://touchspeak.conheca.me/AppFiles/Audio/" + fileName, sPath + fileName,
+					
+					fileTransfer.download("http://touchspeak.conheca.me/AppFiles/Audio/" + fileName, dirEntry.fullPath + fileName,
 					function(theFile) {
-						   console.log("download complete: " + theFile.toURL());
-						   showLink(theFile.toURL());
+						console.log("download complete: " + theFile.toURL());
+						playAudio(theFile.toURL());
 					},
 					function(error) {
 						   console.log("download error source " + error.source);
@@ -69,7 +65,7 @@
 
     }
  
-    function showLink(url){
+    function playAudio(url){
         
 		var media = new Media(url.replace('file:/', ''), function(){
 			console.log('Play');
