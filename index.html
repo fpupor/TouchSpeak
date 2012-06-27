@@ -5,85 +5,12 @@
     <title>navigator.network.connection.type Example</title>
 
     <script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"></script>
-    <script type="text/javascript" charset="utf-8">
-
-    // Wait for Cordova to load
-    // 
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // Cordova is loaded and it is now safe to make calls Cordova methods
-    //
-	
-	var BASEPATH;
-	
-    function onDeviceReady() {
-		checkConnection();
-    }
-
-    function checkConnection() {
-        var networkState = navigator.network.connection.type;
-
-        var states = {};
-        states[Connection.UNKNOWN]  = 'Unknown connection';
-        states[Connection.ETHERNET] = 'Ethernet connection';
-        states[Connection.WIFI]     = 'WiFi connection';
-        states[Connection.CELL_2G]  = 'Cell 2G connection';
-        states[Connection.CELL_3G]  = 'Cell 3G connection';
-        states[Connection.CELL_4G]  = 'Cell 4G connection';
-        states[Connection.NONE]     = 'No network connection';
-
-		
-		console.log(states[networkState]);
-		
-		downloadFile();
-    }
-	
-	function downloadFile(){
-        window.requestFileSystem( LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
-			fileSystem.root.getDirectory("TouchSpeak",
-				{
-					create: true,
-					exclusive: false
-				}, 
-				function (dirEntry){
-					var fileTransfer = new FileTransfer();
-					var fileName = "bbd74649e7fc1910b3e9b5620500705e.mp3";
-					
-					fileTransfer.download("http://touchspeak.conheca.me/AppFiles/Audio/" + fileName, dirEntry.fullPath + "/" + fileName,
-					function(theFile) {
-						console.log("download complete: " + theFile.toURL());
-						playAudio(theFile.toURL());
-					},
-					function(error) {
-						   console.log("download error source " + error.source);
-						   console.log("download error target " + error.target);
-						   console.log("upload error code: " + error.code);
-					});
-				},fail);
-			}, 
-		fail);
-
-    }
- 
-    function playAudio(url){
-        
-		var media = new Media(url.replace('file:/', ''), function(){
-			console.log('Play');
-		}, function(){
-			console.log('Erro no play');
-		});
-		
-		media.play();
-    }
- 
- 
-    function fail(evt) {
-        console.log(evt.target.error.code);
-    }
- 
-    </script>
+    <script type="text/javascript" charset="utf-8" src="Assets/js/utils.js"></script>
+    <script type="text/javascript" charset="utf-8" src="Assets/js/update.js"></script>
+    <script type="text/javascript" charset="utf-8" src="Assets/js/program.js"></script>
+    <script type="text/javascript" charset="utf-8" src="Assets/js/main.js"></script>
   </head>
-  <body>
-    <p>A dialog box will report the network state.</p>
+  <body onload="Main.init();">
+    <h1>TouchSpeak <small>v0.0.1</small></h1>
   </body>
 </html>
