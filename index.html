@@ -13,6 +13,9 @@
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
+	
+	var BASEPATH;
+	
     function onDeviceReady() {
 		checkConnection();
     }
@@ -32,8 +35,32 @@
 		
 		console.log(states[networkState]);
 		
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSystemSuccess, cantRoot);
+    }
+
+	function cantRoot(){ 
+			console.log("Error - Can't access FileSystem."); 
+	} 
+
+	function onSystemSuccess(fileSystem) { 
+		fileSystem.root.getDirectory("Android/data/com.alunny.amazing", {
+			create:true
+		},gotDir,cantDir); 
+	} 
+
+	function gotDir(d){ 
+		BASEPATH = d; // I store my App basis Directory. 
+		var reader = base.createReader(); 
+		reader.readEntries(gotFiles,cantRead); 
+	} 
+
+	function cantDir(){ 
+		console.log("Error - Can't access Application Directory."); 
+	} 
+
+	function gotFiles(entries){ 
 		var fileTransfer = new FileTransfer();
-		var fileName = "audio.mp3";
+		var fileName = BASEPATH + "audio.mp3";
 		
 		fileTransfer.download(
 			"http://touchspeak.conheca.me/AppFiles/Audio/bbd74649e7fc1910b3e9b5620500705e.mp3",
@@ -54,9 +81,7 @@
 				console.log("download error code" + error.http_status);
 			}
 		);
-
-    }
-
+	} 
     </script>
   </head>
   <body>
