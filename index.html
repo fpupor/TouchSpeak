@@ -29,7 +29,9 @@
         states[Connection.CELL_4G]  = 'Cell 4G connection';
         states[Connection.NONE]     = 'No network connection';
 
-			
+		
+		console.log(states[networkState]);
+		
 		var fileTransfer = new FileTransfer();
 		var fileName = "audio.mp3";
 		
@@ -37,18 +39,18 @@
 			"http://touchspeak.conheca.me/AppFiles/Audio/bbd74649e7fc1910b3e9b5620500705e.mp3",
 			fileName,
 			function(entry) {
-				alert"download complete: " + entry.fullPath);
+				console.log("download complete: " + entry.fullPath);
 				
 				var media = new Media(fileName, function(){
-					
+					console.log('Play');
 				}, function(){
-					alert('Erro no play');
+					console.log('Erro no play');
 				});
 			},
 			function(error) {
-				alert("download error source " + error.source);
-				alert("download error target " + error.target);
-				alert("download error code" + error.code);
+				console.log("download error source " + error.source);
+				console.log("download error target " + error.target);
+				console.log("download error code" + error.code);
 			}
 		);
 
