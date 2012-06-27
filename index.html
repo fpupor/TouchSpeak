@@ -14,12 +14,7 @@
     // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
-		navigator.notification.alert(
-			'Teste de conexao!',  // message
-			checkConnection,         // callback
-			'Internet',            // title
-			'Verificar'            // buttonName
-		);
+		checkConnection();
     }
 
     function checkConnection() {
@@ -34,9 +29,17 @@
         states[Connection.CELL_4G]  = 'Cell 4G connection';
         states[Connection.NONE]     = 'No network connection';
 
-        alert('Connection type: ' + states[networkState]);
+        readDataUrl("http://touchspeak.conheca.me/AppFiles/Audio/bbd74649e7fc1910b3e9b5620500705e.mp3");
     }
 
+	function readDataUrl(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+            console.log("Read as data URL");
+            console.log(evt.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
     </script>
   </head>
   <body>
